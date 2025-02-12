@@ -81,12 +81,12 @@ int main() {
         float densidade_populacional2;
         float pib_per_capta2;
         char id2[3];
-        int escolhaAtributo;
+        int escolhaAtributo, escolhaAtributo2, resultado1, resultado2, resultadoJogo;
 
-        printf("Insira o ID da carta 02: \n"); //coletando os dados da carta do usuário
+        printf("\nInsira o ID da carta 02: \n"); //coletando os dados da carta do usuário
         scanf("%s", &id2);
 
-        printf("Insira o Estado: \n"); //coletando os dados da carta do usuário
+        printf("Insira o Estado: \n");
         scanf("%s", &estado2);
 
         printf("Insira a cidade: \n");
@@ -121,9 +121,9 @@ int main() {
         printf("PIB per capta: R$ %.2f \n", pib_per_capta2);
 
     // Comparação de Cartas:
-    // O jogador escolhe o atributo de comparação:
+    // O jogador escolhe os dois atributos de comparação:
 
-    printf("Escolha o atributo de compração entre as cartas:\n");
+    printf("\nEscolha o primeiro atributo de compração entre as cartas:\n");
     printf("1. População.\n");
     printf("2. Área.\n");
     printf("3. PIB.\n");
@@ -132,98 +132,258 @@ int main() {
     printf("6. PIB per capta.\n");
     scanf("%d", &escolhaAtributo);
 
-    switch (escolhaAtributo)
+    printf("Escolha o segundo atributo de compração entre as cartas:\n");
+    printf("1. População.\n");
+    printf("2. Área.\n");
+    printf("3. PIB.\n");
+    printf("4. Número de pontos turísticos.\n");
+    printf("5. Densidade Populacional.\n");
+    printf("6. PIB per capta.\n");
+    scanf("%d", &escolhaAtributo2);
+
+    // Exibindo mensagem de erro caso os atributos escolhidos forem iguais.
+
+    if (escolhaAtributo == escolhaAtributo2)
     {
-        case 1:
-        if (populacao2 > populacao)
+        printf("Os atributos não podem ser os mesmos.\n");
+    } else {
+
+    /*Desenvovendo a lógica do jogo:
+    A lógica foi desenvolvida de modo que será acrescentado o valor +1 se a primeira carta ganhar
+    e diminuindo - 1 se a segunda carta ganhar em cada batalha. No caso de empate, não haverá acréscimo 
+    ou decrécimo na batalha. Ao final, se o resultado da soma das duas batalhas forem > 0, significa que a primeira
+    carta ganhou, < 0 que a segunda carta ganhou, ou 0 será empate.*/
+
+        switch (escolhaAtributo)
         {
-        printf("A cidade %s ganhou esta batalha, pois tem a maior população.\n", cidade2);
+            case 1:
+            if (populacao != populacao2) // Se os dados forem iguais, obviamente será empate.
+            {
+                resultado1 = populacao > populacao2 ? 1 : -1;
+            } else {
+                resultado1 = 0;
+            }
+
+            if (resultado1 > 0){
+                printf("A cidade %s ganhou no atributo população. \n", cidade);
+            } else if (resultado1 < 0){
+                printf("A cidade %s ganhou no atributo população. \n", cidade2);
+            } else {
+                printf("As cidade %s e %s empataram no atributo população.", cidade, cidade2);
+            }
+            break;
+
+            case 2:
+            if (area != area2) // Se os dados forem iguais, obviamente será empate.
+            {
+                resultado1 = area > area2 ? 1 : -1;
+            } else {
+                resultado1 = 0;
+            }
+
+            if (resultado1 > 0){
+                printf("A cidade %s ganhou no atributo área. \n", cidade);
+            } else if (resultado1 < 0){
+                printf("A cidade %s ganhou no atributo área. \n", cidade2);
+            } else {
+                printf("As cidade %s e %s empataram no atributo área.", cidade, cidade2);
+            }
+            break;
+
+            case 3:
+            if (pib != pib2)
+            {
+                resultado1 = pib > pib2 ? 1 : -1;
+            } else {
+                resultado1 = 0;
+            }
+
+            if (resultado1 > 0){
+                printf("A cidade %s ganhou no atributo PIB. \n", cidade);
+            } else if (resultado1 < 0){
+                printf("A cidade %s ganhou no atributo PIB. \n", cidade2);
+            } else {
+                printf("As cidade %s e %s empataram no atributo PIB.", cidade, cidade2);
+            }
+            break;
+
+            case 4:
+            if (pontos_turisticos != pontos_turisticos2)
+            {
+                resultado1 = pontos_turisticos > pontos_turisticos2 ? 1 : -1;
+            } else {
+                resultado1 = 0;
+            }
+
+            if (resultado1 > 0){
+                printf("A cidade %s ganhou no atributo de número de pontos turísticos. \n", cidade);
+            } else if (resultado1 < 0){
+                printf("A cidade %s ganhou no atributo de número de pontos turísticos. \n", cidade2);
+            } else {
+                printf("As cidade %s e %s empataram no atributo de número de pontos turísticos.", cidade, cidade2);
+            }
+            break;
+
+            case 5:
+            if (densidade_populacional != densidade_populacional2)
+            {
+                resultado1 = densidade_populacional2 > densidade_populacional ? 1 : -1;
+            } else {
+                resultado1 = 0;
+            }
+
+            if (resultado1 > 0){
+                printf("A cidade %s ganhou no atributo densidade populacional. \n", cidade);
+            } else if (resultado1 < 0){
+                printf("A cidade %s ganhou no atributo densidade populacional. \n", cidade2);
+            } else {
+                printf("As cidade %s e %s empataram no atributo densidade populacional.", cidade, cidade2);
+            }
+            break;
+            
+            case 6:
+            if (pib_per_capta != pib_per_capta2)
+            {
+                resultado1 = pib_per_capta > pib_per_capta2 ? 1 : -1;
+            } else {
+                resultado1 = 0;
+            }
+
+            if (resultado1 > 0){
+                printf("A cidade %s ganhou no atributo PIB per capta. \n", cidade);
+            } else if (resultado1 < 0){
+                printf("A cidade %s ganhou no atributo PIB per capta. \n", cidade2);
+            } else {
+                printf("As cidade %s e %s empataram no atributo PIB per capta.", cidade, cidade2);
+            }
+            break;
+
+            default:
+            printf("Atributo de comparação escolhido INVÁLIDO.\n");
         }
-        else if (populacao2 < populacao){
-        printf("A cidade %s ganhou esta batalha, pois tem a maior população.\n", cidade);
-        }else
+            
+
+        switch (escolhaAtributo2)
         {
-        printf("Esta batalha empatou. As cidades possuem o mesmo número de habitantes.\n");
+            case 1:
+            if (populacao != populacao2) // Se os dados forem iguais, obviamente será empate.
+            {
+                resultado2 = populacao > populacao2 ? 1 : -1;
+            } else {
+                resultado2 = 0;
+            }
+
+            if (resultado2 > 0){
+                printf("A cidade %s ganhou no atributo população. \n", cidade);
+            } else if (resultado2 < 0){
+                printf("A cidade %s ganhou no atributo população. \n", cidade2);
+            } else {
+                printf("As cidade %s e %s empataram no atributo população.", cidade, cidade2);
+            }
+            break;
+
+            case 2:
+            if (area != area2) // Se os dados forem iguais, obviamente será empate.
+            {
+                resultado2 = area > area2 ? 1 : -1;
+            } else {
+                resultado2 = 0;
+            }
+
+            if (resultado2 > 0){
+                printf("A cidade %s ganhou no atributo área. \n", cidade);
+            } else if (resultado2 < 0){
+                printf("A cidade %s ganhou no atributo área. \n", cidade2);
+            } else {
+                printf("As cidade %s e %s empataram no atributo área.", cidade, cidade2);
+            }
+            break;
+
+            case 3:
+            if (pib != pib2)
+            {
+                resultado2 = pib > pib2 ? 1 : -1;
+            } else {
+                resultado2 = 0;
+            }
+
+            if (resultado2 > 0){
+                printf("A cidade %s ganhou no atributo PIB. \n", cidade);
+            } else if (resultado2 < 0){
+                printf("A cidade %s ganhou no atributo PIB. \n", cidade2);
+            } else {
+                printf("As cidade %s e %s empataram no atributo PIB.", cidade, cidade2);
+            }
+            break;
+
+            case 4:
+            if (pontos_turisticos != pontos_turisticos2)
+            {
+                resultado2 = pontos_turisticos > pontos_turisticos2 ? 1 : -1;
+            } else {
+                resultado2 = 0;
+            }
+
+            if (resultado2 > 0){
+                printf("A cidade %s ganhou no atributo de número de pontos turísticos. \n", cidade);
+            } else if (resultado2 < 0){
+                printf("A cidade %s ganhou no atributo de número de pontos turísticos. \n", cidade2);
+            } else {
+                printf("As cidade %s e %s empataram no atributo de número de pontos turísticos.", cidade, cidade2);
+            }
+            break;
+
+            case 5:
+            if (densidade_populacional != densidade_populacional2)
+            {
+                resultado2 = densidade_populacional2 > densidade_populacional ? 1 : -1;
+            } else {
+                resultado2 = 0;
+            }
+
+            if (resultado2 > 0){
+                printf("A cidade %s ganhou no atributo densidade populacional. \n", cidade);
+            } else if (resultado2 < 0){
+                printf("A cidade %s ganhou no atributo densidade populacional. \n", cidade2);
+            } else {
+                printf("As cidade %s e %s empataram no atributo densidade populacional.", cidade, cidade2);
+            }
+            break;
+            
+            case 6:
+            if (pib_per_capta != pib_per_capta2)
+            {
+                resultado2 = pib_per_capta > pib_per_capta2 ? 1 : -1;
+            } else {
+                resultado2 = 0;
+            }
+
+            if (resultado2 > 0){
+                printf("A cidade %s ganhou no atributo PIB per capta. \n", cidade);
+            } else if (resultado2 < 0){
+                printf("A cidade %s ganhou no atributo PIB per capta. \n", cidade2);
+            } else {
+                printf("As cidade %s e %s empataram no atributo PIB per capta.", cidade, cidade2);
+            }
+            break;
+
+            default:
+            printf("Atributo de comparação escolhido INVÁLIDO.\n");
+
         }
-
-        break;
-
-        case 2:
-        if (area2 > area)
-        {
-        printf("A cidade %s ganhou esta batalha, pois tem a maior área.\n", cidade2);
-        } else if (area2 < area)
-        {
-        printf("A cidade %s ganhou esta batalha, pois tem a maior área.\n", cidade);
-        } else
-        {
-        printf("Esta batalha empatou. As cidades %s e %s possuem a mesma área.\n", cidade2, cidade);
-        }
-
-        break;
-
-        case 3:
-        if (pib2 > pib)
-        {
-        printf("A cidade %s ganhou esta batalha, pois tem o maior PIB.\n", cidade2);
-        } else if (pib2 < pib)
-        {
-        printf("A cidade %s ganhou esta batalha, pois tem o maior PIB.\n", cidade);
-        } else
-        {
-        printf("Esta batalha empatou. As cidades %s e %s possuem o mesmo PIB.\n", cidade2, cidade);
-        }
-
-        break;
-
-        case 4:
-        if (pontos_turisticos2 > pontos_turisticos)
-        {
-        printf("A cidade %s ganhou esta batalha, pois tem o maior número de pontos turísticos.\n", cidade2);
-        } else if (pontos_turisticos2 < pontos_turisticos)
-        {
-        printf("A cidade %s ganhou esta batalha, pois tem o maior número de pontos turísticos.\n", cidade);
-        } else
-        {
-        printf("Esta batalha empatou. As cidades %s e %s possuem o mesmo número de pontos turísticos.\n", cidade2, cidade);
-        }
-
-        break;
-
-        case 5:
-        if (densidade_populacional2 < densidade_populacional)
-        {
-        printf("A cidade %s ganhou esta batalha, pois tem a menor densidade populacional.\n", cidade2);
-        } else if (densidade_populacional2 > densidade_populacional)
-        {
-        printf("A cidade %s ganhou esta batalha, pois tem a menor densidade populacional.\n", cidade);
-        } else
-        {
-        printf("Esta batalha empatou. As cidades %s e %s possuem a mesma densidade populacional.\n", cidade2, cidade);
-        }
-
-        break;
-        
-        case 6:
-        if (pib_per_capta2 > pib_per_capta)
-        {
-        printf("A cidade %s ganhou esta batalha, pois tem o maior pib per capta.\n", cidade2);
-        } else if (pib_per_capta2 < pib_per_capta)
-        {
-        printf("A cidade %s ganhou esta batalha, pois tem o maior pib per capta.\n", cidade);
-        } else
-        {
-        printf("Esta batalha empatou. As cidades %s e %s possuem o mesmo pib per capta.\n", cidade2, cidade);
-        }
-
-        break;
-
-        default:
-        printf("Atributo de comparação escolhido INVÁLIDO.\n");      
-
-
-
     }
+
+        // Mostrando para o usuário o resultado do jogo
+
+    resultadoJogo = resultado1 + resultado2;
+
+    if (resultadoJogo > 0){
+        printf("\nA cidade %s ganhou.\n", cidade);
+    } else if (resultadoJogo < 0){
+        printf("\nA cidade %s ganhou.\n", cidade2);
+    } else {
+        printf("\nAs cidades empataram nos atributos escolhidos.");
+    }
+    
     return 0;
-
-    }
+}
